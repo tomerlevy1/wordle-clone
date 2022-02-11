@@ -1,20 +1,14 @@
 {
   "name": "wordle-clone",
-  "version": "1.0.0",
-  "description": "Just a wordle clone",
-  "main": "index.js",
+  "private": true,
+  "version": "0.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tomerlevy1/wordle-clone.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tomerlevy1/wordle-clone/issues"
-  },
-  "homepage": "https://github.com/tomerlevy1/wordle-clone#readme"
+  "devDependencies": {
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0"
+  }
 }
