@@ -1,8 +1,20 @@
-import './style.css'
+import './style.scss';
 
-const app = document.querySelector<HTMLDivElement>('#app')!
+const board = document.querySelector<HTMLDivElement>('#board')!;
 
-app.innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`
+const createCellElement = () => {
+  const cell = document.createElement('div');
+  cell.className = 'cell cell-empty';
+  return cell;
+};
+
+const initBoard = () => {
+  for (let i = 0; i < 7; i++) {
+    for (let j = 0; j < 5; j++) {
+      const cell = createCellElement();
+      board.appendChild(cell);
+    }
+  }
+};
+
+initBoard();
