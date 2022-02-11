@@ -4,7 +4,7 @@ const board = document.querySelector<HTMLDivElement>('#board')!;
 
 const createCellElement = () => {
   const cell = document.createElement('div');
-  cell.className = 'cell cell-empty';
+  cell.className = 'cell cell--empty';
   return cell;
 };
 
