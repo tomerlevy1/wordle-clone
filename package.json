@@ -1,0 +1,20 @@
+{
+  "name": "wordle-clone",
+  "version": "1.0.0",
+  "description": "Just a wordle clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomerlevy1/wordle-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomerlevy1/wordle-clone/issues"
+  },
+  "homepage": "https://github.com/tomerlevy1/wordle-clone#readme"
+}
