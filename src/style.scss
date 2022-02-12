@@ -43,7 +43,7 @@ h1 {
 
   @for $i from 1 to 30 {
     &:nth-child(#{$i}) {
-      animation-delay: $i * 25ms;
+      animation-delay: $i % 6 * 25ms;
     }
   }
 

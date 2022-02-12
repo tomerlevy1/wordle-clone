@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "npm",
     "vite",
-    "game"
+    "game",
+    "animations"
   ]
 }
