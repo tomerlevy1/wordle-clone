@@ -1,15 +1,4 @@
-import { wordList1, wordList2 } from './words-list';
-
-enum ELetterValue {
-  Correct = 'correct',
-  Present = 'present',
-  Absent = 'absent',
-}
-
-export interface ILetterResult {
-  letter: string;
-  value: ELetterValue;
-}
+import { ILetterResult } from './game';
 
 const board = document.querySelector<HTMLDivElement>('#board')!;
 const boardCells: Array<Array<HTMLElement>> = [];
