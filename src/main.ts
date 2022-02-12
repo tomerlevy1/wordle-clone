@@ -1,4 +1,5 @@
 import { addLetter, applyAttempt, deleteLetter, initBoard, isGameOver } from './board';
+import { initKeyboard, updateKeys } from './keyboard';
 import './style.scss';
 import { initUserInput } from './user-input';
 
@@ -6,7 +7,9 @@ let finished = false;
 const enterCallback = () => {
   if (finished) return;
 
-  applyAttempt();
+  const lettersResults = applyAttempt()!;
+  updateKeys(lettersResults);
+
   finished = isGameOver();
 };
 
@@ -21,4 +24,5 @@ const inputCallback = (letter: string) => {
 };
 
 initBoard();
+initKeyboard();
 initUserInput(inputCallback, deleteCallback, enterCallback);

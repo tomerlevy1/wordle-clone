@@ -1,5 +1,16 @@
 import { wordList1, wordList2 } from './words-list';
 
+enum ELetterValue {
+  Correct = 'correct',
+  Present = 'present',
+  Absent = 'absent',
+}
+
+export interface ILetterResult {
+  letter: string;
+  value: ELetterValue;
+}
+
 const board = document.querySelector<HTMLDivElement>('#board')!;
 
 const boardCells: Array<Array<HTMLElement>> = [];
@@ -13,8 +24,7 @@ const getSecretWord = () => {
   const wordList = Math.floor(Math.random() * 2);
   const list = allWords[wordList];
   const wordIndex = Math.floor(Math.random() * list.length);
-  console.log(list[wordIndex]);
-
+  // console.log(list[wordIndex]);
   return list[wordIndex];
 };
 
@@ -36,17 +46,6 @@ const initBoard = () => {
     boardCells.push(row);
   }
 };
-
-enum ELetterValue {
-  Correct = 'correct',
-  Present = 'present',
-  Absent = 'absent',
-}
-
-interface ILetterResult {
-  letter: string;
-  value: ELetterValue;
-}
 
 const calculateLetterValue = (letter: string, index: number) => {
   if (secret) {
@@ -86,8 +85,17 @@ const deleteLetter = () => {
   currentAttempt.pop();
 };
 
+const isValidWord = () => {
+  const word = currentAttempt.join('');
+  return wordList1.includes(word) || wordList2.includes(word);
+};
+
 const applyAttempt = () => {
   if (currentAttempt.length < 5) return;
+
+  if (!isValidWord()) {
+    return [];
+  }
 
   attempts.push(currentAttempt.join(''));
   const result = calculateResult();
@@ -98,6 +106,7 @@ const applyAttempt = () => {
   }
 
   currentAttempt.length = 0;
+  return result;
 };
 
 const addLetter = (letter: string) => {
@@ -110,7 +119,7 @@ const addLetter = (letter: string) => {
 };
 
 const isGameOver = () => {
-  return attempts.length === 5 || foundSecret;
+  return attempts.length === 6 || foundSecret;
 };
 
 export { initBoard, applyAttempt, addLetter, deleteLetter, isGameOver };
