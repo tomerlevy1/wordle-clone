@@ -12,21 +12,7 @@ export interface ILetterResult {
 }
 
 const board = document.querySelector<HTMLDivElement>('#board')!;
-
 const boardCells: Array<Array<HTMLElement>> = [];
-const attempts = [];
-let secret: string | null = null;
-let currentAttempt: string[] = [];
-let foundSecret = false;
-
-const getSecretWord = () => {
-  const allWords = [wordList1, wordList2];
-  const wordList = Math.floor(Math.random() * 2);
-  const list = allWords[wordList];
-  const wordIndex = Math.floor(Math.random() * list.length);
-  // console.log(list[wordIndex]);
-  return list[wordIndex];
-};
 
 const createCellElement = () => {
   const cell = document.createElement('div');
@@ -35,7 +21,6 @@ const createCellElement = () => {
 };
 
 const initBoard = () => {
-  secret = getSecretWord();
   for (let i = 0; i < 6; i++) {
     const row = [];
     for (let j = 0; j < 5; j++) {
@@ -45,27 +30,6 @@ const initBoard = () => {
     }
     boardCells.push(row);
   }
-};
-
-const calculateLetterValue = (letter: string, index: number) => {
-  if (secret) {
-    if (secret.charAt(index) === letter) {
-      return ELetterValue.Correct;
-    } else if (secret.includes(letter)) {
-      return ELetterValue.Present;
-    }
-  }
-
-  return ELetterValue.Absent;
-};
-
-const calculateResult = (): ILetterResult[] => {
-  return currentAttempt.map((letter, i) => {
-    return {
-      letter,
-      value: calculateLetterValue(letter, i),
-    };
-  });
 };
 
 const setWord = (rowIndex: number, result: ILetterResult[]) => {
@@ -78,48 +42,16 @@ const setWord = (rowIndex: number, result: ILetterResult[]) => {
   });
 };
 
-const deleteLetter = () => {
-  const row = boardCells[attempts.length];
-  const cell = row[currentAttempt.length - 1];
+const deleteLetter = (rowIndex: number, columnIndex: number) => {
+  const row = boardCells[rowIndex];
+  const cell = row[columnIndex];
   cell.textContent = '';
-  currentAttempt.pop();
 };
 
-const isValidWord = () => {
-  const word = currentAttempt.join('');
-  return wordList1.includes(word) || wordList2.includes(word);
-};
-
-const applyAttempt = () => {
-  if (currentAttempt.length < 5) return;
-
-  if (!isValidWord()) {
-    return [];
-  }
-
-  attempts.push(currentAttempt.join(''));
-  const result = calculateResult();
-  setWord(attempts.length - 1, result);
-
-  if (result.every((record) => record.value === ELetterValue.Correct)) {
-    foundSecret = true;
-  }
-
-  currentAttempt.length = 0;
-  return result;
-};
-
-const addLetter = (letter: string) => {
-  if (currentAttempt.length > 4) return;
-
-  const row = boardCells[attempts.length];
-  const cell = row[currentAttempt.length];
+const addLetter = (letter: string, rowIndex: number, columnIndex: number) => {
+  const row = boardCells[rowIndex];
+  const cell = row[columnIndex];
   cell.textContent = letter;
-  currentAttempt.push(letter);
 };
 
-const isGameOver = () => {
-  return attempts.length === 6 || foundSecret;
-};
-
-export { initBoard, applyAttempt, addLetter, deleteLetter, isGameOver };
+export { initBoard, addLetter, deleteLetter, setWord };
