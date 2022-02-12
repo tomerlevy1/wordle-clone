@@ -1,0 +1,19 @@
+@keyframes flipIn {
+0% {
+  transform: rotateX(0);
+}
+
+  100% {
+    transform: rotateX(90deg);
+  }
+}
+
+@keyframes flipOut {
+  0% {
+    transform: rotateX(90deg);
+  }
+
+  100% {
+    transform: rotateX(0);
+  }
+}

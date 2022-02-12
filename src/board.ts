@@ -26,8 +26,21 @@ const setWord = (rowIndex: number, result: ILetterResult[]) => {
 
   result.forEach((record, i) => {
     const cell = row[i];
-    cell.textContent = record.letter;
-    cell.className = `cell cell--${record.value}`;
+    cell.className = 'cell cell--flip-in';
+    cell.addEventListener(
+      'animationend',
+      () => {
+        cell.className = `cell cell--flip-out cell--${record.value}`;
+        cell.addEventListener(
+          'animationend',
+          () => {
+            cell.classList.remove('cell--flip-out');
+          },
+          { once: true }
+        );
+      },
+      { once: true }
+    );
   });
 };
 

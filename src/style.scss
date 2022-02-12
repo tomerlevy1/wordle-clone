@@ -1,3 +1,5 @@
+@import 'animations.scss';
+
 html,
 body {
   margin: 0;
@@ -39,6 +41,12 @@ h1 {
   line-height: 54px;
   font-weight: bold;
 
+  @for $i from 1 to 30 {
+    &:nth-child(#{$i}) {
+      animation-delay: $i * 25ms;
+    }
+  }
+
   &--empty {
     border-color: #333;
   }
@@ -58,6 +66,15 @@ h1 {
 
   &--correct {
     @include cell-color(#538d4e);
+  }
+
+  &--flip-in {
+    animation: flipIn 400ms ease-out forwards;
+  }
+
+  &--flip-out {
+    transform: rotateX(90deg);
+    animation: flipOut 400ms ease-in forwards;
   }
 }
 
