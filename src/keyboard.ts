@@ -1,7 +1,6 @@
-import { ILetterResult } from './board';
+import { ILetterResult } from './game';
 
 const keyboard = document.querySelector<HTMLDivElement>('#keyboard')!;
-const keysRef = {};
 
 const SPECIAL_KEYS: { [key: string]: string } = {
   enter: '&#9166',
