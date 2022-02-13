@@ -54,6 +54,11 @@ const addLetter = (letter: string, rowIndex: number, columnIndex: number) => {
   const row = boardCells[rowIndex];
   const cell = row[columnIndex];
   cell.textContent = letter;
+
+  cell.classList.add('cell--pop-in');
+  cell.addEventListener('animationend', () => {
+    cell.classList.remove('cell--pop-in');
+  });
 };
 
 export { initBoard, addLetter, deleteLetter, setWord };

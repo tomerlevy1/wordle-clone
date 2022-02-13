@@ -40,6 +40,7 @@ h1 {
   font-size: 30px;
   line-height: 54px;
   font-weight: bold;
+  transform-origin: center;
 
   @for $i from 1 to 30 {
     &:nth-child(#{$i}) {
@@ -69,12 +70,18 @@ h1 {
   }
 
   &--flip-in {
-    animation: flipIn 400ms ease-out forwards;
+    animation: flipIn 500ms ease-out forwards;
   }
 
   &--flip-out {
     transform: rotateX(90deg);
-    animation: flipOut 400ms ease-in forwards;
+    animation: flipOut 500ms ease-in forwards;
+  }
+
+  &--pop-in {
+    opacity: 0;
+    transform: scale(0.75);
+    animation: popIn 100ms ease-in forwards;
   }
 }
 

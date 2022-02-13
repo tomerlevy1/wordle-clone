@@ -1,7 +1,7 @@
 @keyframes flipIn {
-0% {
-  transform: rotateX(0);
-}
+  0% {
+    transform: rotateX(0);
+  }
 
   100% {
     transform: rotateX(90deg);
@@ -15,5 +15,26 @@
 
   100% {
     transform: rotateX(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
