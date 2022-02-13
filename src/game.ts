@@ -57,7 +57,19 @@ export default class Game {
     };
 
     initBoard();
-    initKeyboard();
+    initKeyboard((key: string) => {
+      switch (key) {
+        case 'backspace':
+          this.deleteLetter();
+          break;
+        case 'enter':
+          this.applyAttempt();
+          break;
+        default:
+          this.addLetter(key);
+          break;
+      }
+    });
     initUserInput(inputCallback, deleteCallback, enterCallback);
     console.log(this.state);
   }

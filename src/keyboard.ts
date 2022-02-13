@@ -1,7 +1,9 @@
-import { ILetterResult } from './board';
+import { ILetterResult } from './game';
 
 const keyboard = document.querySelector<HTMLDivElement>('#keyboard')!;
-const keysRef = {};
+
+type ClickHandlerFn = (key: string) => void;
+let clickHandler: ClickHandlerFn;
 
 const SPECIAL_KEYS: { [key: string]: string } = {
   enter: '&#9166',
@@ -22,10 +24,19 @@ const addKeysRow = (keys: string[]) => {
   keyboard.appendChild(container);
 };
 
-const initKeyboard = () => {
+const addClickHandlers = () => {
+  Array.from(keyboard.querySelectorAll('.kb__key')).forEach((el: Element) => {
+    const key = el.getAttribute('data-key')!;
+    el.addEventListener('click', () => clickHandler(key));
+  });
+};
+
+const initKeyboard = (cb: ClickHandlerFn) => {
+  clickHandler = cb;
   addKeysRow('qwertyuiop'.split(''));
   addKeysRow('asdfghjkl'.split(''));
   addKeysRow(['enter', ...'zxcvbnm'.split(''), 'backspace']);
+  addClickHandlers();
 };
 
 const updateKeys = (lettersResults: ILetterResult[]) => {
